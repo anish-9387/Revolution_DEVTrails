@@ -1,3 +1,7 @@
+<div align="center">
+  <img src="assets/logo.jpeg" alt="KuberaAI Logo" width="250" />
+</div>
+
 # KuberaAI — Trustless Parametric Insurance for India's Gig Economy
 
 ---
@@ -34,6 +38,8 @@ Instead of covering assets, it protects **income** — the only thing that truly
 
 ### End-to-End Flow
 
+![End-to-End Flow](assets/flow-diagram.jpeg)
+
 ```
 Worker Registers
        ↓
@@ -66,6 +72,8 @@ Unlike traditional insurance, KuberaAI does not require workers to *prove* they 
 ---
 
 ## AI-Powered Risk & Pricing Engine
+
+![Payout Calculation Logic](assets/payout-calculation-logic.jpeg)
 
 Premiums are not one-size-fits-all. The AI engine personalizes pricing using:
 
@@ -149,6 +157,8 @@ KuberaAI follows a **fairness-first approach** that protects genuine workers eve
 ---
 
 ### Multi-Layer Defense Architecture (Implementation Layer)
+
+![Multi-Layer Defense Architecture](assets/layer-diagram.jpeg)
 
 #### Layer 1 — Multi-Sensor Fusion (Beyond GPS)
 

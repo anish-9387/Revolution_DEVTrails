@@ -2,15 +2,15 @@
   <img src="assets/logo.jpeg" alt="KuberaAI Logo" width="250" />
 </div>
 
-# KuberaAI — Trustless Parametric Insurance for India's Gig Economy
+# KuberaAI - Trustless Parametric Insurance for India's Gig Economy
 
 ---
 
 ## The Problem
 
-India's gig delivery workforce — riders on Zomato, Swiggy, Zepto, Amazon, and similar platforms — are the backbone of urban last-mile logistics. Yet they operate with **zero income safety net**.
+India's gig delivery workforce - riders on Zomato, Swiggy, Zepto, Amazon, and similar platforms - are the backbone of urban last-mile logistics. Yet they operate with **zero income safety net**.
 
-When disruptions hit — extreme rainfall, dangerous AQI levels, heatwaves, or zone curfews — these workers lose **20–30% of their weekly income** overnight. Through no fault of their own. With no recourse.
+When disruptions hit - extreme rainfall, dangerous AQI levels, heatwaves, or zone curfews - these workers lose **20–30% of their weekly income** overnight. Through no fault of their own. With no recourse.
 
 There is currently **no income protection mechanism** designed for this segment. Traditional insurance is either:
 - Too slow (days to weeks for claim processing)
@@ -23,7 +23,7 @@ There is currently **no income protection mechanism** designed for this segment.
 
 KuberaAI is a **fully automated, AI + blockchain-powered parametric insurance platform** purpose-built for gig workers.
 
-Instead of covering assets, it protects **income** — the only thing that truly matters to a delivery rider.
+Instead of covering assets, it protects **income** - the only thing that truly matters to a delivery rider.
 
 **Core promise:**
 - Weekly premium model aligned with gig income cycles
@@ -81,7 +81,7 @@ Premiums are not one-size-fits-all. The AI engine personalizes pricing using:
 - **Worker activity data** (hours active, zones covered, delivery density)
 - **Zone-based disruption probability scores**
 
-This ensures fairness — a rider in flood-prone Mumbai pays a different premium than one in arid Jaipur.
+This ensures fairness - a rider in flood-prone Mumbai pays a different premium than one in arid Jaipur.
 
 ---
 
@@ -91,9 +91,9 @@ This ensures fairness — a rider in flood-prone Mumbai pays a different premium
 
 Parametric systems face a critical vulnerability: if payouts are triggered by location + disruption data, bad actors can **spoof GPS signals** and fake presence in a disruption zone to collect fraudulent payouts at scale.
 
-KuberaAI treats this as a **first-class adversarial threat** — not an afterthought.
+KuberaAI treats this as a **first-class adversarial threat** - not an afterthought.
 
-### Adversarial Defense Strategy — The Core Answer
+### Adversarial Defense Strategy - The Core Answer
 
 #### 1. Threat Model: Coordinated GPS Spoofing Attacks
 
@@ -111,11 +111,11 @@ KuberaAI is engineered specifically to detect and survive this attack pattern.
 **KuberaAI's core insight**: A genuine claim requires alignment across *multiple independent systems*.
 
 A claim is considered valid only when:
-1. **Physical motion matches delivery behavior** — Accelerometer + Gyroscope show realistic movement patterns
-2. **Platform activity confirms work** — Orders are accepted, completed, and timestamped in delivery app
-3. **Environmental conditions align** — Worker's location, weather, AQI match expected disruption zone
-4. **Temporal physics are obeyed** — No teleportation between zones; velocity consistent with real riding
-5. **No coordinated anomaly is detected** — DBSCAN clustering doesn't flag the worker as part of a syndicate
+1. **Physical motion matches delivery behavior** - Accelerometer + Gyroscope show realistic movement patterns
+2. **Platform activity confirms work** - Orders are accepted, completed, and timestamped in delivery app
+3. **Environmental conditions align** - Worker's location, weather, AQI match expected disruption zone
+4. **Temporal physics are obeyed** - No teleportation between zones; velocity consistent with real riding
+5. **No coordinated anomaly is detected** - DBSCAN clustering doesn't flag the worker as part of a syndicate
 
 **Why this works:** Spoofing requires synchronizing multiple independent systems simultaneously.
 - A fraudster can fake GPS ✓
@@ -145,12 +145,12 @@ KuberaAI analyzes multiple independent data streams beyond GPS:
 
 KuberaAI follows a **fairness-first approach** that protects genuine workers even during high-fraud scenarios:
 
-- **No instant rejection** — Suspicious claims are delayed for validation, not rejected outright
-- **Lightweight revalidation** — Workers can confirm presence via OTP, in-app check-in, or simple device confirmation (< 5 minutes)
-- **Network resilience** — Failures during severe weather are treated as valid edge cases, not fraud signals
-- **Transparent decision-making** — Workers see exactly why claims are held and what evidence is needed to authorize
-- **Micro-loans for delays** — Genuine workers under review receive bridge funding to prevent economic hardship
-- **Automatic escalation** — If validation fails, claims move to manual review with worker notification
+- **No instant rejection** - Suspicious claims are delayed for validation, not rejected outright
+- **Lightweight revalidation** - Workers can confirm presence via OTP, in-app check-in, or simple device confirmation (< 5 minutes)
+- **Network resilience** - Failures during severe weather are treated as valid edge cases, not fraud signals
+- **Transparent decision-making** - Workers see exactly why claims are held and what evidence is needed to authorize
+- **Micro-loans for delays** - Genuine workers under review receive bridge funding to prevent economic hardship
+- **Automatic escalation** - If validation fails, claims move to manual review with worker notification
 
 **Outcome**: The system errs toward trust while gathering evidence. False positives are minimized through multi-layered validation rather than automated rejection.
 
@@ -160,14 +160,14 @@ KuberaAI follows a **fairness-first approach** that protects genuine workers eve
 
 ![Multi-Layer Defense Architecture](assets/layer-diagram.jpeg)
 
-#### Layer 1 — Multi-Sensor Fusion (Beyond GPS)
+#### Layer 1 - Multi-Sensor Fusion (Beyond GPS)
 
 GPS alone is easily spoofed. KuberaAI cross-validates location using:
 
-- **Accelerometer** — Is the device actually moving like a delivery rider would?
-- **Gyroscope** — Are motion patterns consistent with real-world riding?
-- **Network triangulation** — Do Wi-Fi access points and cell towers agree with GPS?
-- **Environmental correlation signals** (where available) — Pressure, humidity, and light levels can optionally validate environmental conditions match the claimed disruption zone. During rainfall or heat events, these signals provide additional consistency checks.
+- **Accelerometer** - Is the device actually moving like a delivery rider would?
+- **Gyroscope** - Are motion patterns consistent with real-world riding?
+- **Network triangulation** - Do Wi-Fi access points and cell towers agree with GPS?
+- **Environmental correlation signals** (where available) - Pressure, humidity, and light levels can optionally validate environmental conditions match the claimed disruption zone. During rainfall or heat events, these signals provide additional consistency checks.
 
 A fraudster can fake a GPS coordinate. Faking motion sensors + network signals + platform data simultaneously is exponentially harder.
 
@@ -176,21 +176,21 @@ A fraudster can fake a GPS coordinate. Faking motion sensors + network signals +
 - Are orders being accepted and completed on the delivery app?
 - Is the worker spending time in active delivery zones?
 - Is activity consistent with typical work patterns?
-- **Work Shift Coherence** — Sudden geographic pivots are suspicious. If a worker's claimed location is 50km from their usual work zones, require higher confidence levels.
-- **Sleep Pattern Validation** — At 3 AM, a sudden payout claim from a worker who normally sleeps is flagged (unless there's prior emergency shift history).
-- **Peer-zone Activity Correlation** — Legitimate delivery workers typically operate in consistent geographic clusters. If a worker suddenly claims disruption in a zone where none of their historical activity occurs, flag it for additional validation.
+- **Work Shift Coherence** - Sudden geographic pivots are suspicious. If a worker's claimed location is 50km from their usual work zones, require higher confidence levels.
+- **Sleep Pattern Validation** - At 3 AM, a sudden payout claim from a worker who normally sleeps is flagged (unless there's prior emergency shift history).
+- **Peer-zone Activity Correlation** - Legitimate delivery workers typically operate in consistent geographic clusters. If a worker suddenly claims disruption in a zone where none of their historical activity occurs, flag it for additional validation.
 
 A genuine worker has a trail of consistent platform activity across time and space. A fraud actor impersonating one or running automated scripts does not.
 
-#### Layer 3 — Environmental Cross-Validation & Public Data Oracles
+#### Layer 3 - Environmental Cross-Validation & Public Data Oracles
 
 - Does the volume of claims from a zone match the actual disruption severity?
 - Are claims clustering in statistically anomalous ways?
 - **Third-Party Data Validation**: Cross-validate with independent public data sources:
   - **Weather APIs** (rainfall, AQI, temperature) from government meteorological agencies
   - **Public disruption reports** (news, social media, traffic apps showing slowdowns)
-  - **Geographic claim volume correlation** — If a real disruption occurred, independent reports should exist (news, weather alerts, traffic data)
-- **Temporal anomaly detection** — Claims arriving in tight temporal windows from the same zone are cross-checked against independent disruption confirmation
+  - **Geographic claim volume correlation** - If a real disruption occurred, independent reports should exist (news, weather alerts, traffic data)
+- **Temporal anomaly detection** - Claims arriving in tight temporal windows from the same zone are cross-checked against independent disruption confirmation
 
 Fraud rings that trigger mass fake payouts leave detectable statistical fingerprints that contradict real-world environmental data.
 
@@ -199,9 +199,9 @@ Fraud rings that trigger mass fake payouts leave detectable statistical fingerpr
 - **Device fingerprinting** to detect account duplication and detect multiple claims from same device
 - **Emulator and rooted device detection** (common tools for GPS spoofing)
 - **Detection of synthetic identities** (unusual signup patterns, inconsistent user data)
-- **Session consistency validation** — Verify claims come from same IP, device, and browser context (unexpected device switches = suspicious)
-- **User re-validation for suspicious claims** — OTP or in-app confirmation required for medium/high-risk claims
-- **Manual audit triggers** — Claims from new devices or unusual locations are flagged for human review before payout
+- **Session consistency validation** - Verify claims come from same IP, device, and browser context (unexpected device switches = suspicious)
+- **User re-validation for suspicious claims** - OTP or in-app confirmation required for medium/high-risk claims
+- **Manual audit triggers** - Claims from new devices or unusual locations are flagged for human review before payout
 
 #### Layer 5 — AI Fraud Detection Models & Syndicate Ring Detection
 
@@ -237,10 +237,10 @@ The system is designed to **never penalize genuine workers** due to network glit
 
 #### Layer 7 — Immutable Claim Ledger & Payout Logging
 
-- **Claim hash storage** — Each validated claim is hashed and stored on-chain, creating an immutable record
-- **Payout logging** — All approved payouts are timestamped and logged on-chain for transparency and audit
-- **Non-repudiation** — Workers and KuberaAI both have cryptographic proof of what claim was submitted and when
-- **Future auditability** — If fraud is discovered post-payout, the immutable ledger provides evidence for the investigation
+- **Claim hash storage** - Each validated claim is hashed and stored on-chain, creating an immutable record
+- **Payout logging** - All approved payouts are timestamped and logged on-chain for transparency and audit
+- **Non-repudiation** - Workers and KuberaAI both have cryptographic proof of what claim was submitted and when
+- **Future auditability** - If fraud is discovered post-payout, the immutable ledger provides evidence for the investigation
 
 ---
 
@@ -313,7 +313,7 @@ This prevents liquidity exhaustion while maintaining fair treatment.
 
 KuberaAI is built on cybersecurity-grade principles:
 
-- **Zero Trust Model** — No component trusts another by default
+- **Zero Trust Model** - No component trusts another by default
 - **OWASP Top 10** compliance
 - **AES-256** data encryption at rest
 - **TLS 1.3** for all data in transit
@@ -342,9 +342,9 @@ Blockchain is used minimally and strategically — enabling transparency and imm
 
 This ensures immutability and transparency without blockchain's complexity overhead.
 
-### Piggybank — Micro-Savings Innovation
+### Piggybank - Micro-Savings Innovation
 
-Workers can opt into a **Piggybank wallet** — a micro-savings buffer that auto-accumulates small amounts during normal weeks, providing an additional personal safety net during prolonged disruptions.
+Workers can opt into a **Piggybank wallet** - a micro-savings buffer that auto-accumulates small amounts during normal weeks, providing an additional personal safety net during prolonged disruptions.
 
 - Transparent transaction history
 - Worker-controlled withdrawals
@@ -414,7 +414,7 @@ Any worker in the Indian gig economy whose income is vulnerable to uncontrollabl
 
 ## Why It Matters
 
-India has an estimated **15 million+ gig workers** in delivery alone, with the number growing every year. The lack of a financial safety net for this workforce is not just an individual problem — it's a systemic economic vulnerability.
+India has an estimated **15 million+ gig workers** in delivery alone, with the number growing every year. The lack of a financial safety net for this workforce is not just an individual problem - it's a systemic economic vulnerability.
 
 KuberaAI is the first step toward a future where the gig economy's growth doesn't come at the cost of the workers powering it.
 

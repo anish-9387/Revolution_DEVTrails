@@ -1,0 +1,4 @@
+# Optional ML acceleration for fraud scoring and DBSCAN ring detection.
+# Install this only if your Python runtime has compatible binary wheels.
+numpy>=2.1
+scikit-learn>=1.5

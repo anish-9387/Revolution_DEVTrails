@@ -1,92 +1,134 @@
-import React, { useState, useEffect } from 'react';
-import GlassPanel from './GlassPanel';
-import { ArrowRight, PlayCircle, CloudRain, Lightning, Thermometer, Moped, UserPlus, Brain, Broadcast, Warning, Coins } from '@phosphor-icons/react';
-
-const AnimatedNumber = ({ end, suffix = "" }) => {
-  const [count, setCount] = useState(0);
-  
-  useEffect(() => {
-    let startTime = null;
-    const duration = 2000;
-    
-    const animate = (timestamp) => {
-      if (!startTime) startTime = timestamp;
-      const progress = Math.min((timestamp - startTime) / duration, 1);
-      setCount(Math.floor(progress * end));
-      if (progress < 1) {
-        requestAnimationFrame(animate);
-      }
-    };
-    
-    requestAnimationFrame(animate);
-  }, [end]);
-  
-  return <>{count}{suffix}</>;
-};
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { 
+  ArrowRight, PlayCircle, CloudRain, ShieldCheck, Thermometer, Warning, Broadcast, Coins, UserPlus, Brain,
+  EnvelopeSimple, Coin, Sparkle, Receipt, Bank, CheckCircle 
+} from '@phosphor-icons/react';
 
 export const Hero = () => {
   return (
-    <header className="hero-section">
-      <div className="container hero-container">
-        <div className="hero-content">
-          <div className="badge-pill mb-6">
-            <span className="pulse-dot"></span>
-            <span>Parametric Insurance 2.0</span>
-          </div>
-          <h1 className="hero-title">
-            Income Protection for <br />
-            <span className="text-gradient">India’s Gig Workforce</span>
+    <header className="fintech-hero">
+      <div className="container fintech-hero-container">
+        
+        {/* Top Text Content */}
+        <div className="fintech-hero-content text-center">
+          <h1 className="fintech-hero-title">
+            The Future of <br/> Gig Protection
           </h1>
-          <p className="hero-subtitle">
-            AI + Blockchain powered parametric insurance that pays instantly when disruptions hit. Zero paperwork. Zero delays. Protecting the backbone of our cities.
+          <p className="fintech-hero-subtitle">
+            AI-powered instant payouts when disruptions hit. Zero paperwork.<br/>Protecting the backbone of our cities.
           </p>
-          <div className="hero-cta">
-            <a href="#join" className="btn btn-primary btn-large btn-glow">
-              Get Protected
-              <ArrowRight weight="bold" />
-            </a>
-            <a href="#how-it-works" className="btn btn-secondary btn-large">
-              <PlayCircle weight="bold" />
-              See How It Works
-            </a>
+          
+          <div className="fintech-hero-form">
+            <div className="fintech-input-wrapper">
+              <EnvelopeSimple size={20} className="input-icon" />
+              <input 
+                type="email" 
+                placeholder="Your Email Address" 
+                className="fintech-input"
+              />
+              <Link to="/auth" className="btn-get-protected" style={{textDecoration: 'none'}}>
+                Get Protected
+              </Link>
+            </div>
+            <p className="fintech-disclaimer">
+              *Zero paperwork. Zero delays. Automated instant payouts.
+            </p>
           </div>
         </div>
         
-        <div className="hero-visuals">
-          <GlassPanel className="floating-card card-1">
-            <div className="card-icon blue"><CloudRain weight="bold" /></div>
-            <div className="card-info">
-              <h4>Rainfall Trigger Detected</h4>
-              <p>Bandra West, Mumbai • &gt;50mm/hr</p>
-            </div>
-            <div className="card-status status-active">Active</div>
-          </GlassPanel>
+        {/* Visual Content: Phone & Popups */}
+        <div className="fintech-hero-visual">
+          
+          {/* Decorative Gradient Blob */}
+          <div className="fintech-blob"></div>
+          <div className="fintech-blob-2"></div>
 
-          <GlassPanel className="floating-card card-2">
-            <div className="card-icon gold"><Lightning weight="fill" /></div>
-            <div className="card-info">
-              <h4>₹1200 Payout Released</h4>
-              <p>Smart Contract Executed</p>
-            </div>
-            <div className="card-status status-success">Instant</div>
-          </GlassPanel>
+          {/* SVG Connector Lines */}
+          <svg className="connector-lines" style={{ minWidth: '1000px', left: '50%', transform: 'translateX(-50%)' }}>
+            <path d="M 300 220 Q 380 220 400 300" stroke="#ccc" strokeWidth="1.5" fill="none" strokeDasharray="4 4" />
+            <path d="M 700 200 Q 600 180 580 250" stroke="#ccc" strokeWidth="1.5" fill="none" strokeDasharray="4 4" />
+          </svg>
 
-          <GlassPanel className="floating-card card-3">
-            <div className="card-icon red"><Thermometer weight="bold" /></div>
-            <div className="card-info">
-              <h4>Heatwave Emergency</h4>
-              <p>Temperature &gt; 42°C • Delhi</p>
-            </div>
-            <div className="card-status status-alert">Activated</div>
-          </GlassPanel>
+          {/* Phone Frame */}
+          <div className="fintech-phone">
+             <div className="dynamic-island"></div>
+             
+             {/* Phone Content Inner */}
+             <div className="phone-screen">
+                <div className="phone-header-custom">
+                   <div className="close-btn-wrapper">
+                       <span className="close-x">x</span>
+                   </div>
+                   <span className="phone-header-title">Protection Dashboard</span>
+                   <div style={{width: '24px'}}></div>
+                </div>
 
-          <div className="hero-globe">
-            <div className="globe-ring ring-1"></div>
-            <div className="globe-ring ring-2"></div>
-            <div className="globe-ring ring-3"></div>
-            <div className="globe-core"></div>
+                {/* Main Card inside Phone */}
+                <div className="credit-card-mockup">
+                   <div className="card-shine"></div>
+                   <div className="card-top-row">
+                      <div className="card-logo">
+                        <ShieldCheck weight="fill" /> KIA
+                      </div>
+                   </div>
+                   <div className="card-number">
+                     1253 5432 3521 3090
+                   </div>
+                   <div className="card-bottom-row">
+                     <div>
+                       <p className="card-label">Gig Platform ID</p>
+                       <p className="card-value">UBER-XYZ-92</p>
+                     </div>
+                     <div className="mastercard-circles">
+                       <div className="mc-circle"></div>
+                     </div>
+                   </div>
+                </div>
+                
+                {/* Secondary Phone Dashboard visual */}
+                <div className="dashboard-alert">
+                   <div className="alert-icon-wrapper">
+                       <CloudRain weight="fill" />
+                   </div>
+                   <div className="alert-text">
+                       <p className="alert-title">Heavy Rain Expected</p>
+                       <p className="alert-subtitle">Bandra West</p>
+                   </div>
+                </div>
+             </div>
           </div>
+
+          {/* Floating Cards */}
+          <div className="floating-card popup-yellow">
+             <Sparkle className="popup-icon" size={24} weight="fill" />
+             <p className="popup-text">Zero Friction.<br/>Just Link ID.</p>
+          </div>
+
+          <div className="floating-card popup-orange">
+             <div className="popup-orange-icon">
+               <Receipt size={18} weight="bold" />
+             </div>
+             <h2 className="popup-orange-title">₹1,200</h2>
+             <div className="popup-pill">
+               Payout Ready
+             </div>
+          </div>
+
+          <div className="floating-card popup-green">
+             <div className="popup-green-icon"><Bank size={24} weight="regular" /></div>
+             <p className="popup-green-text">
+               We monitor weather & traffic matters seriously so that you don't have to.
+             </p>
+          </div>
+
+          <div className="floating-card popup-black cursor-pointer group">
+             <span className="popup-black-text">See Demo</span>
+             <ArrowRight size={16} className="popup-black-arrow" />
+          </div>
+
         </div>
+        
       </div>
     </header>
   );
@@ -97,31 +139,23 @@ export const Problem = () => {
     <section id="problem" className="problem-section">
       <div className="container">
         <div className="section-header text-center">
-          <h2 className="section-title">The Hidden Risk Behind <span className="text-gradient-red">Every Delivery</span></h2>
-          <p className="section-desc max-w-2xl mx-auto">When the city stops, they still ride. Extreme weather and disruptions mean lost income and unsafe conditions for millions.</p>
+          <h2 className="section-title">The Real Cost of <span className="text-gradient">Disruptions</span></h2>
+          <p className="section-desc max-w-2xl mx-auto">When extreme weather hits, incomes freeze. We believe every gig worker deserves a safety net.</p>
         </div>
 
-        <div className="problem-grid flex justify-center">
-          <GlassPanel className="problem-visual w-full max-w-4xl">
-            <div className="weather-overlay rain"></div>
-            <div className="rider-silhouette">
-              <Moped weight="fill" />
-            </div>
-            <div className="stats-counter-container flex flex-col md:flex-row">
-              <div className="stat-box mt-auto">
-                <h3 className="stat-number">
-                  <AnimatedNumber end={30} suffix="%" />
-                </h3>
-                <p className="stat-label">Income lost during harsh weather</p>
-              </div>
-              <div className="stat-box mt-auto">
-                <h3 className="stat-number">
-                  <AnimatedNumber end={15} suffix="M+" />
-                </h3>
-                <p className="stat-label">Gig workers highly vulnerable</p>
-              </div>
-            </div>
-          </GlassPanel>
+        <div className="problem-grid">
+          <div className="card stat-card">
+            <h3 className="stat-number text-gradient-teal">30%</h3>
+            <p className="stat-label">Income Lost During Extreme Weather</p>
+          </div>
+          <div className="card stat-card">
+            <h3 className="stat-number">15M+</h3>
+            <p className="stat-label">Gig Workers Highly Vulnerable</p>
+          </div>
+          <div className="card stat-card">
+            <h3 className="stat-number" style={{ color: "var(--highlight)" }}>0</h3>
+            <p className="stat-label">Instant Support Available Today</p>
+          </div>
         </div>
       </div>
     </section>
@@ -134,7 +168,7 @@ export const HowItWorks = () => {
       <div className="container">
         <div className="section-header text-center">
           <h2 className="section-title">Zero Friction. <span className="text-gradient-teal">Instant Payouts.</span></h2>
-          <p className="section-desc max-w-2xl mx-auto">Traditional insurance is broken. We replaced claims, agents, and paperwork with smart contracts and weather oracles.</p>
+          <p className="section-desc max-w-2xl mx-auto">Forget claims and 30-day waiting periods. We process risk data in real-time to pay you the minute you need it.</p>
         </div>
 
         <div className="steps-container">
@@ -142,8 +176,8 @@ export const HowItWorks = () => {
             <div className="step-icon-wrapper">
               <UserPlus weight="bold" />
             </div>
-            <h3>1. Worker Registers</h3>
-            <p>Links wallet and platform ID instantly.</p>
+            <h3>1. Register</h3>
+            <p>Link your gig platform ID securely.</p>
           </div>
           
           <div className="step-connector"></div>
@@ -152,38 +186,38 @@ export const HowItWorks = () => {
             <div className="step-icon-wrapper">
               <Brain weight="bold" />
             </div>
-            <h3>2. AI Prices Risk</h3>
-            <p>Personalized micro-premiums calculated in real-time.</p>
+            <h3>2. AI Pricing</h3>
+            <p>Micro-premiums matched to your personalized risk.</p>
           </div>
           
           <div className="step-connector"></div>
           
           <div className="step-card">
-            <div className="step-icon-wrapper pulse-ring">
+            <div className="step-icon-wrapper">
               <Broadcast weight="bold" />
             </div>
-            <h3>3. System Monitors</h3>
-            <p>24/7 API integration with weather stations & traffic.</p>
+            <h3>3. Monitoring</h3>
+            <p>24/7 API sync with weather & traffic networks.</p>
           </div>
           
           <div className="step-connector"></div>
           
           <div className="step-card">
-            <div className="step-icon-wrapper warning">
+            <div className="step-icon-wrapper" style={{ color: "var(--highlight)" }}>
               <Warning weight="bold" />
             </div>
-            <h3>4. Event Detected</h3>
-            <p>Disruption threshold matched exactly.</p>
+            <h3>4. Trigger</h3>
+            <p>Disruption threshold algorithmically met.</p>
           </div>
           
           <div className="step-connector"></div>
           
           <div className="step-card">
-            <div className="step-icon-wrapper success">
+            <div className="step-icon-wrapper" style={{ color: "var(--secondary)" }}>
               <Coins weight="fill" />
             </div>
             <h3>5. Instant Payout</h3>
-            <p>Smart contract on Polygon pays wallet in seconds.</p>
+            <p>Funds transferred to your account instantly.</p>
           </div>
         </div>
       </div>

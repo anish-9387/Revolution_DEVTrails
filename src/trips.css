@@ -1,0 +1,261 @@
+.trips-section {
+  padding: 6rem 0;
+  background: #ffffff;
+  font-family: 'Inter', sans-serif;
+  color: #111827;
+}
+
+.trips-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.trips-subtitle {
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #634af5, #a58df8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 1px;
+}
+
+.trips-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin: 0.5rem 0;
+  color: #111827;
+}
+
+.trips-desc {
+  color: #6b7280;
+  font-size: 0.95rem;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.trips-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.t-card {
+  border-radius: 20px;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 280px;
+}
+
+.t-card-icon {
+  width: 40px;
+  height: 40px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+  font-size: 1.25rem;
+  z-index: 2;
+  position: relative;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.t-card-content {
+  z-index: 2;
+  position: relative;
+}
+
+.t-card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+}
+
+.t-card-desc {
+  font-size: 0.85rem;
+  opacity: 0.9;
+  line-height: 1.5;
+}
+
+/* Specific Card Colors */
+.t-card-light-purple { background: #dcd2f6; color: #1f1f1f; }
+.t-card-dark-purple { background: #634af5; color: white; }
+.t-card-yellow { background: #fbc24a; color: #1f1f1f; }
+.t-card-coral { background: #ec6a52; color: white; }
+.t-card-blue { background: #4b74f5; color: white; }
+
+/* Graphics / Patterns */
+.t-graphic {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 120px;
+  height: 120px;
+  z-index: 1;
+}
+
+.t-graphic-circles { right: -30px; top: -30px; }
+.t-graphic-circles circle { fill: none; stroke: rgba(99, 74, 245, 0.15); stroke-width: 15; }
+
+.t-graphic-u { right: 20px; top: -10px; }
+.t-graphic-u path { fill: none; stroke: rgba(255, 255, 255, 0.15); stroke-width: 20; stroke-linecap: round; }
+
+.t-graphic-grid { right: 0; top: 0; opacity: 0.2; }
+
+/* Second Section */
+.trips-header-2 { margin-top: 6rem; }
+.trips-subtitle-2 { color: #111827; }
+.trips-title-orange {
+  background: linear-gradient(135deg, #ec6a52, #fbc24a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.trips-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.t-card-large {
+  min-height: 380px;
+  padding: 0;
+}
+.t-card-large .t-card-content { padding: 2.5rem; }
+
+/* Third Section */
+.trips-grid-1 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  max-width: 1000px;
+  margin: 1.5rem auto 0;
+}
+
+.t-card-wide {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  min-height: 300px;
+  padding: 0;
+}
+
+.t-wide-content { flex: 1; padding: 3rem; padding-left: 0; }
+.t-wide-visual { flex: 1; position: relative; height: 100%; min-height: 300px; }
+
+/* Visual Mockups inside Cards */
+.mockup-audio {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 85%;
+  height: 140px;
+  box-shadow: 0 -10px 30px rgba(0,0,0,0.1);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  color: #1f1f1f;
+}
+
+.audio-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 1rem;
+}
+.border-r { border-right: 1px solid #e5e7eb; }
+
+.audio-icon-wrapper {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.75rem;
+}
+.audio-icon-blue { background: rgba(75, 116, 245, 0.1); color: #4b74f5; }
+.audio-icon-red { background: rgba(236, 106, 82, 0.1); color: #ec6a52; }
+.audio-label { font-weight: 700; font-size: 0.95rem; margin-bottom: 0.25rem;}
+.audio-sub { font-size: 0.75rem; color: #6b7280;}
+
+.mockup-notion {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 85%;
+  box-shadow: 0 -10px 30px rgba(0,0,0,0.1);
+  color: #1f1f1f;
+  font-size: 0.8rem;
+}
+
+.notion-header { margin-bottom: 1.5rem; display: flex; gap: 1.5rem; color: #9ca3af; font-weight: 500;}
+.notion-header span.active { color: #111827; font-weight: 600;}
+
+.notion-cols { display: flex; gap: 1rem; }
+.notion-col { flex: 1; background: #f9fafb; border-radius: 8px; padding: 0.75rem; border: 1px solid #f3f4f6;}
+.n-tag { display: inline-block; font-size: 0.7rem; font-weight: 600; margin-bottom: 0.75rem;}
+.n-tag-planning { color: #d97706; }
+.n-tag-progress { color: #2563eb; }
+
+.n-card { background: white; padding: 0.75rem; border-radius: 6px; margin-bottom: 0.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); border: 1px solid #f3f4f6;}
+.n-card-title { font-weight: 600; margin-bottom: 0.5rem; font-size: 0.75rem;}
+.n-badges { display: flex; gap: 0.5rem;}
+.n-badge { background: #f3f4f6; color: #4b5563; padding: 2px 6px; border-radius: 4px; font-size: 0.65rem;}
+
+.mockup-users {
+  position: absolute;
+  left: 3rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 300px;
+}
+
+.u-item {
+  background: white;
+  border-radius: 12px;
+  padding: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  color: #1f1f1f;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+.u-info { display: flex; align-items: center; gap: 0.75rem; }
+.u-avatar { width: 40px; height: 40px; background: #e5e7eb; border-radius: 50%; overflow: hidden;}
+.u-avatar img { width: 100%; height: 100%; object-fit: cover;}
+.u-details h5 { font-size: 0.85rem; font-weight: 700; margin-bottom: 0; }
+.u-details span { font-size: 0.7rem; color: #6b7280; }
+.btn-add {
+  background: #22c55e;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+}

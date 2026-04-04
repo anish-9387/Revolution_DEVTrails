@@ -34,33 +34,6 @@ Instead of covering assets, it protects **income** - the only thing that truly m
 
 ---
 
-## Deliverables Coverage Checklist
-
-The current codebase directly implements the requested hackathon deliverables:
-
-| Deliverable Requirement | Status | Where It Is Implemented |
-|---|---|---|
-| Registration Process | ✅ Implemented | Worker onboarding flow (`POST /api/workers/register`) + multi-page UI onboarding |
-| Insurance Policy Management | ✅ Implemented | Weekly subscription creation, listing, and cancellation (`/api/workers/<id>/subscribe`, `/api/workers/<id>/policies`, `/api/policies/<id>/cancel`) |
-| Dynamic Premium Calculation (Weekly) | ✅ Implemented | AI risk-based pricing engine (`POST /api/workers/<id>/quote`) |
-| Claims Management | ✅ Implemented | Claim submit, risk tiering, revalidation, ledger logging (`/api/claims/submit`, `/api/claims/<id>/revalidate`, `/api/claims`) |
-| Parametric Trigger Automation | ✅ Implemented | Disruption ingestion + monitor runner with auto-claim initiation (`/api/disruptions/report`, `/api/automation/monitor`) |
-| 3-5 Automated Trigger Inputs | ✅ Implemented (7) | Rainfall, heat index, AQI, curfew, official reports, traffic slowdown, platform outage |
-| Loss-of-Income Scope Only | ✅ Enforced | Coverage scope exposed by policy APIs; exclusions: health, life, accidents, vehicle repairs |
-| Analytics Dashboard | ✅ Implemented | Multi-page React dashboard with operational metrics, policy insights, and claim status analytics |
-
-### Trigger Integrations (Public/Mock Friendly)
-
-KuberaAI supports both manual and automated trigger ingestion:
-
-- Manual/simulated event ingestion via `POST /api/disruptions/report`
-- Mock external oracle scan via `POST /api/automation/monitor`
-- Automatic claim initiation for active policies in impacted zones
-
-This design supports free-tier/public APIs in production and deterministic mock feeds in demos.
-
----
-
 ## How It Works
 
 ### End-to-End Flow

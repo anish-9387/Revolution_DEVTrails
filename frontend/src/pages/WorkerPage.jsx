@@ -1,12 +1,14 @@
+import { useNavigate } from "react-router-dom";
 import { useKubera } from "../context/KuberaContext";
 import ActionButton from "../components/ui/ActionButton";
 import FormField from "../components/ui/FormField";
 import SectionCard from "../components/ui/SectionCard";
 
 const inputClass =
-  "w-full rounded-xl border border-slate-300/90 bg-white/95 px-3 py-2 text-sm text-slate-900 shadow-[0_6px_14px_-10px_rgba(15,23,42,0.45)] focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100";
+  "w-full rounded-xl border border-[#e6e1d6] bg-white px-3 py-2 text-sm text-slate-900 shadow-[0_6px_12px_-10px_rgba(15,23,42,0.45)] focus:border-[#2d4db4] focus:outline-none focus:ring-2 focus:ring-[#e8efff]";
 
 export default function WorkerPage() {
+  const navigate = useNavigate();
   const {
     workerForm,
     setWorkerForm,
@@ -37,8 +39,8 @@ export default function WorkerPage() {
       <SectionCard
         index="01"
         title="Worker Registration"
-        subtitle="Create a worker profile before pricing and claims."
-        className="bg-gradient-to-br from-white to-blue-50"
+        subtitle="Optimized onboarding for gig workers and delivery personas."
+        className="bg-[#fffdf8]"
       >
         <form
           className="grid gap-3 md:grid-cols-2"
@@ -130,6 +132,28 @@ export default function WorkerPage() {
             />
           </FormField>
 
+          <FormField label="Shift Start Hour">
+            <input
+              className={inputClass}
+              type="number"
+              min="0"
+              max="23"
+              value={workerForm.active_start_hour}
+              onChange={setWorkerValue("active_start_hour")}
+            />
+          </FormField>
+
+          <FormField label="Shift End Hour">
+            <input
+              className={inputClass}
+              type="number"
+              min="0"
+              max="23"
+              value={workerForm.active_end_hour}
+              onChange={setWorkerValue("active_end_hour")}
+            />
+          </FormField>
+
           <ActionButton type="submit" disabled={loading} className="md:col-span-2">
             Register Worker
           </ActionButton>
@@ -139,8 +163,8 @@ export default function WorkerPage() {
       <SectionCard
         index="02"
         title="Premium & Subscription"
-        subtitle="Generate quote and activate subscription in one place."
-        className="bg-gradient-to-br from-white to-cyan-50"
+        subtitle="Dynamic weekly premium using AI risk factors and activity cadence."
+        className="bg-[#fffdf8]"
       >
         <div className="grid gap-3">
           <FormField label="Hours Active Per Week">
@@ -172,9 +196,10 @@ export default function WorkerPage() {
             <ActionButton type="button" onClick={subscribe} disabled={loading}>
               Activate Subscription
             </ActionButton>
+            <ActionButton type="button" variant="ghost" onClick={() => navigate("/policy")}>Policy Ops</ActionButton>
           </div>
 
-          <div className="rounded-2xl border border-slate-200/90 bg-white/90 p-3 text-sm text-slate-700 shadow-[0_10px_20px_-14px_rgba(15,23,42,0.55)]">
+          <div className="rounded-2xl border border-[#e8e4da] bg-white p-3 text-sm text-slate-700 shadow-[0_10px_20px_-16px_rgba(15,23,42,0.45)]">
             <h3 className="mb-2 font-display text-base font-semibold text-slate-900">Worker Snapshot</h3>
             {!worker ? <p>No worker registered yet.</p> : null}
             {worker ? (
@@ -189,9 +214,14 @@ export default function WorkerPage() {
             ) : null}
 
             {quote ? (
-              <p className="mt-2">
-                Weekly premium: <span className="font-semibold">INR {quote.weekly_premium}</span>
-              </p>
+              <div className="mt-2 space-y-1 rounded-lg border border-[#ece8de] bg-[#faf8f2] p-2">
+                <p>
+                  Weekly premium: <span className="font-semibold">INR {quote.weekly_premium}</span>
+                </p>
+                <p className="text-xs text-slate-600">
+                  Zone risk: {quote.breakdown?.zone_risk_score} | Hours factor: {quote.breakdown?.hours_factor}
+                </p>
+              </div>
             ) : null}
 
             {subscription?.active ? (

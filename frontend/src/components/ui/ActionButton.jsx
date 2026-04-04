@@ -1,12 +1,12 @@
 const STYLES = {
   primary:
-    "bg-gradient-to-r from-sky-500 to-indigo-600 text-white shadow-[0_10px_22px_-12px_rgba(59,130,246,0.95)] hover:from-sky-600 hover:to-indigo-700 focus-visible:ring-blue-400",
+    "bg-gradient-to-r from-[#273c97] to-[#334fb8] text-white shadow-[0_10px_20px_-12px_rgba(39,60,151,0.9)] hover:from-[#22347f] hover:to-[#2e47a4] focus-visible:ring-blue-400",
   secondary:
-    "bg-gradient-to-r from-slate-900 to-slate-700 text-white shadow-[0_10px_22px_-12px_rgba(15,23,42,0.9)] hover:from-slate-800 hover:to-slate-700 focus-visible:ring-slate-400",
+    "bg-gradient-to-r from-[#1e293b] to-[#334155] text-white shadow-[0_10px_22px_-12px_rgba(15,23,42,0.9)] hover:from-[#0f172a] hover:to-[#1e293b] focus-visible:ring-slate-400",
   danger:
-    "bg-gradient-to-r from-rose-600 to-orange-500 text-white shadow-[0_10px_22px_-12px_rgba(244,63,94,0.9)] hover:from-rose-700 hover:to-orange-600 focus-visible:ring-rose-400",
+    "bg-gradient-to-r from-[#e2582f] to-[#f38b3d] text-white shadow-[0_10px_22px_-12px_rgba(226,88,47,0.9)] hover:from-[#cf4f29] hover:to-[#dd7f38] focus-visible:ring-orange-300",
   ghost:
-    "border border-slate-300 bg-white/90 text-slate-800 hover:bg-white focus-visible:ring-slate-400",
+    "border border-[#ddd8ce] bg-white text-slate-700 hover:bg-[#faf8f3] focus-visible:ring-slate-300",
 };
 
 export default function ActionButton({

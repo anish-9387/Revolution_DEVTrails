@@ -7,11 +7,11 @@ export default function SectionCard({
 }) {
   return (
     <section
-      className={`rounded-3xl border border-white/80 bg-white/85 p-5 shadow-[0_16px_38px_-22px_rgba(15,23,42,0.65)] backdrop-blur ${className}`}
+      className={`rounded-2xl border border-[#e5e1d7] bg-[#fffdf8] p-5 shadow-[0_14px_24px_-20px_rgba(15,23,42,0.45)] ${className}`}
     >
       <div className="mb-5 flex items-start gap-3">
         {index ? (
-          <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-r from-cyan-100 to-blue-100 text-xs font-bold text-blue-700">
+          <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-r from-[#ecf2ff] to-[#e7efff] text-xs font-bold text-[#2c4bb4]">
             {index}
           </span>
         ) : null}

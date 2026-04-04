@@ -38,6 +38,10 @@ const INITIAL_DISRUPTION_FORM = {
   curfew: false,
   sustained_hours: 1,
   official_reports: 2,
+  traffic_slowdown_index: 0.4,
+  platform_outage: false,
+  use_mock_oracle: false,
+  auto_initiate_claims: true,
   source: "manual-simulator",
 };
 
@@ -187,8 +191,13 @@ export function KuberaProvider({ children }) {
   const [worker, setWorker] = useState(null);
   const [quote, setQuote] = useState(null);
   const [subscription, setSubscription] = useState(null);
+  const [policies, setPolicies] = useState([]);
+  const [policyCoverage, setPolicyCoverage] = useState(null);
   const [claimResult, setClaimResult] = useState(null);
   const [claims, setClaims] = useState([]);
+  const [lastDisruptionEvent, setLastDisruptionEvent] = useState(null);
+  const [lastAutoClaims, setLastAutoClaims] = useState(null);
+  const [monitorSummary, setMonitorSummary] = useState(null);
 
   const [activeScenario, setActiveScenario] = useState("");
   const [apiStatus, setApiStatus] = useState("checking");
@@ -220,6 +229,15 @@ export function KuberaProvider({ children }) {
     : 0;
 
   const firstScenario = scenarios[0] || null;
+  const activePolicy = useMemo(() => {
+    const found = policies.find((item) => item.active);
+    return found || subscription || null;
+  }, [policies, subscription]);
+
+  const approvedClaimsCount = useMemo(
+    () => claims.filter((item) => item.status === "approved").length,
+    [claims]
+  );
 
   const resetMessages = useCallback(() => {
     setError("");
@@ -239,6 +257,31 @@ export function KuberaProvider({ children }) {
       try {
         const data = await api(`/api/claims?worker_id=${workerId}`);
         setClaims(data.claims || []);
+        setApiStatus("online");
+      } catch (err) {
+        handleError(err);
+      }
+    },
+    [handleError]
+  );
+
+  const fetchPolicies = useCallback(
+    async (workerId) => {
+      if (!workerId) {
+        setPolicies([]);
+        setPolicyCoverage(null);
+        return;
+      }
+
+      try {
+        const data = await api(`/api/workers/${workerId}/policies`);
+        setPolicies(data.policies || []);
+        setPolicyCoverage(data.coverage_scope || null);
+        if (data.active_policy) {
+          setSubscription(data.active_policy);
+        } else {
+          setSubscription(null);
+        }
         setApiStatus("online");
       } catch (err) {
         handleError(err);
@@ -286,11 +329,14 @@ export function KuberaProvider({ children }) {
 
   useEffect(() => {
     if (!worker?.id) {
+      setPolicies([]);
+      setPolicyCoverage(null);
       return;
     }
 
     fetchClaims(worker.id);
-  }, [worker?.id, fetchClaims]);
+    fetchPolicies(worker.id);
+  }, [worker?.id, fetchClaims, fetchPolicies]);
 
   const registerWorker = useCallback(async () => {
     resetMessages();
@@ -310,6 +356,8 @@ export function KuberaProvider({ children }) {
 
       setWorker(response.worker);
       setSubscription(null);
+      setPolicies([]);
+      setPolicyCoverage(null);
       setQuote(null);
       setClaimResult(null);
       setClaims([]);
@@ -381,6 +429,7 @@ export function KuberaProvider({ children }) {
       });
 
       setSubscription(response.subscription);
+      fetchPolicies(worker.id);
       setNotice("Subscription activated.");
       setApiStatus("online");
     } catch (err) {
@@ -388,14 +437,47 @@ export function KuberaProvider({ children }) {
     } finally {
       setLoading(false);
     }
-  }, [handleError, quoteForm, resetMessages, worker]);
+  }, [fetchPolicies, handleError, quoteForm, resetMessages, worker]);
+
+  const cancelPolicy = useCallback(
+    async (policyId) => {
+      if (!policyId) {
+        return;
+      }
+
+      resetMessages();
+      setLoading(true);
+
+      try {
+        await api(`/api/policies/${policyId}/cancel`, {
+          method: "POST",
+        });
+
+        if (subscription?.id === policyId) {
+          setSubscription(null);
+        }
+
+        if (worker?.id) {
+          fetchPolicies(worker.id);
+        }
+
+        setNotice("Policy cancelled successfully.");
+        setApiStatus("online");
+      } catch (err) {
+        handleError(err);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [fetchPolicies, handleError, resetMessages, subscription?.id, worker?.id]
+  );
 
   const reportDisruption = useCallback(async () => {
     resetMessages();
     setLoading(true);
 
     try {
-      await api("/api/disruptions/report", {
+      const response = await api("/api/disruptions/report", {
         method: "POST",
         body: JSON.stringify({
           ...disruptionForm,
@@ -404,17 +486,64 @@ export function KuberaProvider({ children }) {
           aqi: numericValue(disruptionForm.aqi),
           sustained_hours: numericValue(disruptionForm.sustained_hours, 1),
           official_reports: numericValue(disruptionForm.official_reports, 0),
+          traffic_slowdown_index: numericValue(disruptionForm.traffic_slowdown_index, 0),
         }),
       });
 
-      setNotice("Disruption event reported.");
+      setLastDisruptionEvent(response.event || null);
+      setLastAutoClaims(response.auto_claims || null);
+      const autoCreated = response.auto_claims?.created || 0;
+      setNotice(`Disruption event reported. Auto-initiated claims: ${autoCreated}.`);
       setApiStatus("online");
+      if (worker?.id) {
+        fetchClaims(worker.id);
+      }
     } catch (err) {
       handleError(err);
     } finally {
       setLoading(false);
     }
-  }, [disruptionForm, handleError, resetMessages]);
+  }, [disruptionForm, fetchClaims, handleError, resetMessages, worker?.id]);
+
+  const runAutomationMonitor = useCallback(
+    async (zones = []) => {
+      resetMessages();
+      setLoading(true);
+
+      try {
+        const payload = {
+          auto_initiate_claims: true,
+        };
+
+        if (Array.isArray(zones) && zones.length) {
+          payload.zones = zones;
+        }
+
+        const response = await api("/api/automation/monitor", {
+          method: "POST",
+          body: JSON.stringify(payload),
+        });
+
+        setMonitorSummary(response);
+        setNotice(
+          `Automation scan complete. ${response.auto_claims_created || 0} claims auto-initiated.`
+        );
+        setApiStatus("online");
+
+        if (worker?.id) {
+          fetchClaims(worker.id);
+        }
+
+        return response;
+      } catch (err) {
+        handleError(err);
+        return null;
+      } finally {
+        setLoading(false);
+      }
+    },
+    [fetchClaims, handleError, resetMessages, worker?.id]
+  );
 
   const applyScenario = useCallback(
     (scenario) => {
@@ -584,9 +713,15 @@ export function KuberaProvider({ children }) {
     scenarios,
     worker,
     quote,
-    subscription,
+    subscription: activePolicy,
+    policies,
+    policyCoverage,
     claimResult,
     claims,
+    approvedClaimsCount,
+    lastDisruptionEvent,
+    lastAutoClaims,
+    monitorSummary,
 
     workerForm,
     setWorkerForm,
@@ -609,7 +744,10 @@ export function KuberaProvider({ children }) {
     registerWorker,
     quotePremium,
     subscribe,
+    cancelPolicy,
     reportDisruption,
+    runAutomationMonitor,
+    fetchPolicies,
     applyScenario,
     loadFirstScenario,
     submitClaim,

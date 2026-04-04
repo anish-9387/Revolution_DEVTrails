@@ -1,17 +1,19 @@
 import { NavLink } from "react-router-dom";
 import { useKubera } from "../context/KuberaContext";
+import RightInsightsPanel from "./RightInsightsPanel";
 import StatusBanner from "./ui/StatusBanner";
 
 const navItems = [
-  { to: "/", label: "Overview" },
-  { to: "/worker", label: "Worker & Premium" },
-  { to: "/disruption", label: "Disruption" },
-  { to: "/claims", label: "Claims" },
+  { to: "/", label: "Overview", icon: "OV" },
+  { to: "/worker", label: "Worker", icon: "WK" },
+  { to: "/disruption", label: "Trigger", icon: "TR" },
+  { to: "/policy", label: "Policy", icon: "PL" },
+  { to: "/claims", label: "Claims", icon: "CL" },
 ];
 
 function navClass({ isActive }) {
   return isActive
-    ? "rounded-xl bg-gradient-to-r from-sky-500 to-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-[0_8px_16px_-10px_rgba(59,130,246,0.9)]"
+    ? "rounded-xl bg-[#111d4a] px-3 py-2 text-sm font-semibold text-white shadow-[0_8px_18px_-12px_rgba(17,29,74,0.85)]"
     : "rounded-xl px-3 py-2 text-sm font-semibold text-slate-600 transition hover:bg-white hover:text-slate-900";
 }
 
@@ -26,49 +28,111 @@ function statusDotClass(apiStatus) {
 }
 
 export default function AppLayout({ children }) {
-  const { apiStatus, apiDisplayLabel, loading, error, notice } = useKubera();
+  const { apiStatus, apiDisplayLabel, loading, error, notice, worker, meta, scenarios } = useKubera();
+  const firstName = worker?.full_name?.split(" ")?.[0] || "Partner";
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-slate-100 font-sans text-slate-900">
-      <div className="pointer-events-none absolute -left-16 -top-20 h-72 w-72 rounded-full bg-sky-300/45 blur-3xl" />
-      <div className="pointer-events-none absolute right-0 top-20 h-80 w-80 rounded-full bg-amber-300/35 blur-3xl" />
-      <div className="pointer-events-none absolute bottom-0 left-1/3 h-96 w-96 -translate-x-1/2 rounded-full bg-emerald-300/25 blur-3xl" />
+    <div className="min-h-screen bg-[#d8d7d1] p-3 font-sans text-slate-900 md:p-5">
+      <div className="mx-auto w-full max-w-[1360px] rounded-[28px] border border-[#cbc8be] bg-[#f4f3ee] shadow-[0_30px_60px_-36px_rgba(15,23,42,0.45)]">
+        <div className="grid min-h-[88vh] grid-cols-1 xl:grid-cols-[88px_minmax(0,1fr)_320px]">
+          <aside className="hidden border-r border-[#dfddd3] bg-[#f8f7f2] px-3 py-5 xl:flex xl:flex-col xl:items-center xl:justify-between">
+            <div className="space-y-6">
+              <div className="grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-[#ff6b2d] to-[#ff8e3d] text-sm font-bold text-white">
+                KA
+              </div>
 
-      <header className="sticky top-0 z-20 backdrop-blur">
-        <div className="mx-auto max-w-7xl px-4 pt-4">
-          <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-white/80 bg-white/85 px-4 py-3 shadow-[0_14px_34px_-18px_rgba(15,23,42,0.6)]">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-blue-700">
-                KuberaAI
-              </p>
-              <h1 className="font-display text-xl font-bold text-slate-900">
-                Insurance Console
-              </h1>
+              <nav className="space-y-2">
+                {navItems.map((item) => (
+                  <NavLink key={item.to} to={item.to} className="group block" end={item.to === "/"}>
+                    {({ isActive }) => (
+                      <span
+                        className={`grid h-11 w-11 place-items-center rounded-xl border text-[11px] font-bold transition ${
+                          isActive
+                            ? "border-transparent bg-[#273c97] text-white"
+                            : "border-[#ddd9cf] bg-white text-slate-500 group-hover:border-[#c7c3b8]"
+                        }`}
+                        title={item.label}
+                      >
+                        {item.icon}
+                      </span>
+                    )}
+                  </NavLink>
+                ))}
+              </nav>
             </div>
 
-            <nav className="flex flex-wrap gap-1 rounded-2xl border border-slate-200/80 bg-slate-50/80 p-1">
-              {navItems.map((item) => (
-                <NavLink key={item.to} to={item.to} className={navClass} end={item.to === "/"}>
-                  {item.label}
-                </NavLink>
-              ))}
-            </nav>
+            <div className="space-y-2">
+              <div className="grid h-10 w-10 place-items-center rounded-xl border border-[#ddd9cf] bg-white text-[10px] font-semibold text-slate-500">
+                CFG
+              </div>
+              <div className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-emerald-200 to-cyan-200 text-xs font-bold text-slate-700">
+                {firstName.slice(0, 2).toUpperCase()}
+              </div>
+            </div>
+          </aside>
 
-            <div className="min-w-[180px] rounded-xl border border-slate-200/80 bg-white/80 px-3 py-2 text-xs text-slate-600">
+          <section className="p-4 md:p-6">
+            <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
+              <div>
+                <h1 className="font-display text-2xl font-bold text-slate-900 md:text-3xl">
+                  Good Morning, {firstName}
+                </h1>
+                <p className="text-sm text-slate-600">
+                  Weekly income protection with zero-touch parametric payouts.
+                </p>
+              </div>
+
+              <div className="rounded-full border border-[#e0ddd3] bg-white px-4 py-2 text-xs font-semibold text-slate-700 shadow-[0_10px_18px_-16px_rgba(15,23,42,0.6)]">
+                Ask AI
+              </div>
+            </div>
+
+            <div className="mb-4 flex flex-wrap gap-2">
+              <span className="rounded-xl border border-[#e0ddd4] bg-white px-3 py-1.5 text-xs font-semibold text-slate-700">
+                Weekly Pricing
+              </span>
+              <span className="rounded-xl border border-[#e0ddd4] bg-white px-3 py-1.5 text-xs font-semibold text-slate-700">
+                {meta.zones.length} Zones
+              </span>
+              <span className="rounded-xl border border-[#e0ddd4] bg-white px-3 py-1.5 text-xs font-semibold text-slate-700">
+                {scenarios.length} Trigger Presets
+              </span>
+              <span className="rounded-xl border border-[#e0ddd4] bg-white px-3 py-1.5 text-xs font-semibold text-slate-700">
+                Income Loss Only
+              </span>
+            </div>
+
+            <div className="mb-4 rounded-2xl border border-[#e0ddd4] bg-white px-3 py-2 text-xs text-slate-600">
               <p className="inline-flex items-center gap-2 font-semibold text-slate-700">
                 <span className={`h-2.5 w-2.5 rounded-full ${statusDotClass(apiStatus)}`} />
                 API: {apiStatus}
               </p>
               <p className="truncate">{apiDisplayLabel}</p>
             </div>
-          </div>
-        </div>
-      </header>
 
-      <main className="relative z-10 mx-auto grid max-w-7xl gap-4 px-4 py-5 pb-10">
-        <StatusBanner loading={loading} error={error} notice={notice} />
-        {children}
-      </main>
+            <div className="mb-4 xl:hidden">
+              <nav className="flex flex-wrap gap-1 rounded-2xl border border-[#ddd9cf] bg-[#f8f7f3] p-1">
+                {navItems.map((item) => (
+                  <NavLink key={item.to} to={item.to} className={navClass} end={item.to === "/"}>
+                    {item.label}
+                  </NavLink>
+                ))}
+              </nav>
+            </div>
+
+            <StatusBanner loading={loading} error={error} notice={notice} />
+            <div className="mt-4">{children}</div>
+          </section>
+
+          <aside className="hidden border-l border-[#dfddd3] bg-[#f8f7f2] p-4 xl:block">
+            <RightInsightsPanel />
+          </aside>
+
+          <aside className="border-t border-[#dfddd3] bg-[#f8f7f2] p-4 xl:hidden">
+            <RightInsightsPanel />
+          </aside>
+        </div>
+      </div>
     </div>
   );
 }

@@ -4,6 +4,7 @@ import { KuberaProvider } from "./context/KuberaContext";
 import ClaimsPage from "./pages/ClaimsPage";
 import DisruptionPage from "./pages/DisruptionPage";
 import OverviewPage from "./pages/OverviewPage";
+import PolicyPage from "./pages/PolicyPage";
 import WorkerPage from "./pages/WorkerPage";
 
 export default function App() {
@@ -14,6 +15,7 @@ export default function App() {
           <Route path="/" element={<OverviewPage />} />
           <Route path="/worker" element={<WorkerPage />} />
           <Route path="/disruption" element={<DisruptionPage />} />
+          <Route path="/policy" element={<PolicyPage />} />
           <Route path="/claims" element={<ClaimsPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

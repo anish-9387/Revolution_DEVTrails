@@ -5,7 +5,7 @@ import SectionCard from "../components/ui/SectionCard";
 import ToggleField from "../components/ui/ToggleField";
 
 const inputClass =
-  "w-full rounded-xl border border-slate-300/90 bg-white/95 px-3 py-2 text-sm text-slate-900 shadow-[0_6px_14px_-10px_rgba(15,23,42,0.45)] focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100";
+  "w-full rounded-xl border border-[#e6e1d6] bg-white px-3 py-2 text-sm text-slate-900 shadow-[0_6px_12px_-10px_rgba(15,23,42,0.45)] focus:border-[#2d4db4] focus:outline-none focus:ring-2 focus:ring-[#e8efff]";
 
 function decisionColor(decisionClass) {
   if (decisionClass === "good") {
@@ -47,7 +47,7 @@ export default function ClaimsPage() {
           index="04"
           title="Claim Submission"
           subtitle="Send motion, device, network, and activity evidence bundle."
-          className="bg-gradient-to-br from-white to-orange-50"
+          className="bg-[#fffdf8]"
         >
           {!worker ? (
             <p className="mb-3 rounded-lg border border-amber-300 bg-amber-50 p-2 text-sm text-amber-800">
@@ -194,7 +194,7 @@ export default function ClaimsPage() {
           index="05"
           title="Decision & Revalidation"
           subtitle="Shows trust tier, risk score, payouts, and OTP revalidation flow."
-          className="bg-gradient-to-br from-white to-violet-50"
+          className="bg-[#fffdf8]"
         >
           {!claimResult ? <p className="text-sm text-slate-600">No claim submitted yet.</p> : null}
 
@@ -219,7 +219,7 @@ export default function ClaimsPage() {
                 />
               </div>
 
-              <div className="rounded-2xl border border-slate-200/90 bg-white/90 p-3 text-sm text-slate-700 shadow-[0_10px_20px_-14px_rgba(15,23,42,0.55)]">
+              <div className="rounded-2xl border border-[#e8e4da] bg-white p-3 text-sm text-slate-700 shadow-[0_10px_20px_-16px_rgba(15,23,42,0.45)]">
                 <p>
                   Base payout: <span className="font-semibold">INR {claimResult.claim.base_payout}</span>
                 </p>
@@ -294,7 +294,7 @@ export default function ClaimsPage() {
         index="06"
         title="Recent Claims"
         subtitle="Latest claim records for the active worker session."
-        className="bg-gradient-to-br from-white to-cyan-50"
+        className="bg-[#fffdf8]"
       >
         {!claims.length ? <p className="text-sm text-slate-600">No claims yet.</p> : null}
 

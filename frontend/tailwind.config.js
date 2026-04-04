@@ -4,8 +4,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Manrope", "ui-sans-serif", "system-ui", "sans-serif"],
-        display: ["Sora", "ui-sans-serif", "system-ui", "sans-serif"],
+        sans: ["Source Sans 3", "ui-sans-serif", "system-ui", "sans-serif"],
+        display: ["Bree Serif", "ui-serif", "Georgia", "serif"],
       },
     },
   },
